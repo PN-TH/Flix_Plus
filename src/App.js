@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.scss';
+import ArticleList from './components/Articles/ArticleList';
+import ArticleDetail from './components/Articles/ArticleDetail';
+import ArticleContextProvider from './components/_context/ArticleContextProvider';
+import FavoriteContextProvider from './components/_context/FavoriteContextProvider';
+import FavoriteMovie from './components/Favorite/FavoriteMovie';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ArticleContextProvider>
+        <FavoriteContextProvider>
+          <Router>
+            <Switch>
+              <Route exact path='/' component={ArticleList} />
+              <Route path='/movie/:id' component={ArticleDetail} />
+              <Route path='/favorite' component={FavoriteMovie} />
+            </Switch>
+          </Router>
+        </FavoriteContextProvider>
+      </ArticleContextProvider>
     </div>
   );
 }
