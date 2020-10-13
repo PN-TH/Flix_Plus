@@ -6,12 +6,14 @@ import ArticleDetail from './components/Articles/ArticleDetail';
 import ArticleContextProvider from './components/_context/ArticleContextProvider';
 import FavoriteContextProvider from './components/_context/FavoriteContextProvider';
 import FavoriteMovie from './components/Favorite/FavoriteMovie';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
     <div>
       <ArticleContextProvider>
         <FavoriteContextProvider>
+          <Navbar />
           <Router>
             <Switch>
               <Route exact path='/' component={ArticleList} />
