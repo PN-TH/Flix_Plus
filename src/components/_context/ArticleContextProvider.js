@@ -20,13 +20,15 @@ const ArticleContextProvider = ({ children }) => {
     filterLink = 'discover/movie';
   }
 
+  // https://api.themoviedb.org/3/movie/550/credits?api_key=f22eb05a70b166bd4e2c1312e15d8e8b
+
   useEffect(() => {
     axios
       .get(
         `${URL}${filterLink}${API_KEY}${language}&query=${query}&page=${page_num}`
       )
       .then((response) => {
-        setMovies(response.data.results);
+        setMovies(response.data.results.filter((movie) => movie.poster_path));
       })
       .catch(console.error);
   }, [query, page_num]);
