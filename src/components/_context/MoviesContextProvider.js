@@ -1,13 +1,17 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { Route, Link, Switch } from 'react-router-dom';
 
-export const ArticleContext = createContext();
+export const MoviesContext = createContext();
 
-const ArticleContextProvider = ({ children }) => {
+const MoviesContextProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [page_num, setPageNum] = useState(1);
   const [total_pages, setTotalPages] = useState(null);
   const [query, SetQuery] = useState('');
+  const [ratingFilter, setRatingFilter] = useState('');
+  const [checked, setChecked] = React.useState(false);
+  const [year, setYear] = useState('');
 
   const URL = 'https://api.themoviedb.org/3/';
   const API_KEY = '?api_key=f22eb05a70b166bd4e2c1312e15d8e8b';
@@ -20,18 +24,16 @@ const ArticleContextProvider = ({ children }) => {
     filterLink = 'discover/movie';
   }
 
-  // https://api.themoviedb.org/3/movie/550/credits?api_key=f22eb05a70b166bd4e2c1312e15d8e8b
-
   useEffect(() => {
     axios
       .get(
-        `${URL}${filterLink}${API_KEY}${language}&query=${query}&page=${page_num}`
+        `${URL}${filterLink}${API_KEY}${language}&query=${query}${ratingFilter}primary_release_year=${year}&page=${page_num}`
       )
       .then((response) => {
         setMovies(response.data.results.filter((movie) => movie.poster_path));
       })
       .catch(console.error);
-  }, [query, page_num]);
+  }, [query, page_num, ratingFilter, checked, movies, year]);
 
   const filterSearch = (event) => {
     let term = event.target.value;
@@ -49,14 +51,24 @@ const ArticleContextProvider = ({ children }) => {
     }
   };
 
-  // fetchMovies(search) {
-  //   fetch(URL + `${API_KEY}` + language + query + search + "&page=" + this.state.page_num)
-  //     .then(res => res.json())
-  //     .then(json => this.setState({ movies: json.results, total_pages: json.total_pages }));
-  // }
+  const handleChangeCheckBox = (event) => {
+    setChecked(event.target.checked);
+    if (checked) {
+      setRatingFilter((ratingFilter) => (ratingFilter = ''));
+    } else {
+      setRatingFilter(
+        (ratingFilter) => (ratingFilter = '&sort_by=vote_count.desc')
+      );
+    }
+  };
+
+  const yearFilter = (event) => {
+    let yearToFilter = event.target.value;
+    setYear((year) => yearToFilter);
+  };
 
   return (
-    <ArticleContext.Provider
+    <MoviesContext.Provider
       value={{
         movies,
         query,
@@ -65,11 +77,16 @@ const ArticleContextProvider = ({ children }) => {
         filterSearch,
         nextPage,
         previousPage,
+        ratingFilter,
+        handleChangeCheckBox,
+        checked,
+        yearFilter,
+        year,
       }}
     >
       {children}
-    </ArticleContext.Provider>
+    </MoviesContext.Provider>
   );
 };
 
-export default ArticleContextProvider;
+export default MoviesContextProvider;

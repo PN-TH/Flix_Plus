@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteContextProvider from '../_context/FavoriteContextProvider';
-import './Articles.scss';
+import './Movies.scss';
 
-function Article(props) {
+function Movie(props) {
   const imgUrl = 'https://image.tmdb.org/t/p/original';
   const { data } = props;
 
@@ -15,4 +15,4 @@ function Article(props) {
     </FavoriteContextProvider>
   );
 }
-export default Article;
+export default Movie;

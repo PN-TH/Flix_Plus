@@ -14,7 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { ArticleContext } from '../_context/ArticleContextProvider';
+import { MoviesContext } from '../_context/MoviesContextProvider';
 import { Route, Link, Switch } from 'react-router-dom';
 import './Navbar.scss';
 
@@ -95,7 +95,7 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { filterSearch, movies } = useContext(ArticleContext);
+  const { filterSearch, movies } = useContext(MoviesContext);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -184,7 +184,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
-            Flix+
+            <Link to={{ pathname: `/` }}>Home</Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

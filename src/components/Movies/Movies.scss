@@ -27,6 +27,10 @@
       transform: scale(1.03);
       opacity: 0.9;
     }
+
+    .MuiTypography-body1 {
+      font-size: 3rem;
+    }
   }
 }
 
@@ -35,18 +39,23 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgb(13, 13, 14);
   color: white;
 
   img {
     width: 300px;
-    margin: 30px;
+    margin: 10px;
   }
 
   p {
+    margin-top: 5px;
     text-align: justify;
     width: 40%;
+  }
+
+  Button {
+    margin-top: 20px;
   }
 
   .movie {
@@ -54,6 +63,15 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+
+  @media screen and (max-width: 640px) {
+    img {
+      width: 70%;
+    }
+    p {
+      width: 70%;
+    }
   }
 }
 
@@ -69,7 +87,6 @@
     border-radius: 50%;
     height: 80px;
     border: 3px solid rgb(8, 68, 63);
-
     margin: 10px;
     outline: none;
   }
@@ -80,14 +97,6 @@
     align-items: center;
     flex-direction: column;
     margin-right: 30px;
+    overflow: hidden;
   }
 }
-
-/* @media screen and (max-width: 640px) {
-  img {
-    width: 40%;
-  }
-  p {
-    width: 70%;
-  }
-} */
