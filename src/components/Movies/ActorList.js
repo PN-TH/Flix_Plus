@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { MoviesContext } from '../_context/MoviesContextProvider';
 // Material-UI imports
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { grey } from '@material-ui/core/colors';
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
     background: 'grey'
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 function ActorList() {
   const classes = useStyles();
 
-  const { actors, handleSearchActors, actorID, handleId } = useContext(MoviesContext);
+  const { actors, handleSearchActors, handleId } = useContext(MoviesContext);
 
   return (
     <div className='container'>

@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { FilterList } from '@material-ui/icons';
 
 export const MoviesContext = createContext();
 
@@ -17,7 +16,6 @@ const MoviesContextProvider = ({ children }) => {
   const [checked, setChecked] = React.useState(false);
   const [year, setYear] = useState('');
   const [actors, setActors] = useState([]);
-  const [linkActor, setLinkActor] = useState('');
 
   const URL = 'https://api.themoviedb.org/3/';
   const API_KEY = '?api_key=f22eb05a70b166bd4e2c1312e15d8e8b';
@@ -27,7 +25,7 @@ const MoviesContextProvider = ({ children }) => {
   let queryLink = ''
   if (query.length > 2) {
     filterLink = 'search/movie';
-    let queryLink = '&query='
+    queryLink = '&query='
   } else {
     filterLink = 'discover/movie';
   }
@@ -120,7 +118,6 @@ const MoviesContextProvider = ({ children }) => {
         yearFilter,
         year,
         handlePaginate,
-        total_pages,
         handleSearchActors,
         actorID,
         actors,

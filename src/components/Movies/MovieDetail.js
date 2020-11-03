@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './Movies.scss';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import { FavoriteContext } from '../_context/FavoriteContextProvider';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +14,6 @@ function MovieDetail(props) {
   const imgUrl = 'https://image.tmdb.org/t/p/original';
   const actorsUrl = 'https://image.tmdb.org/t/p/w500/';
 
-  const { favorite } = useContext(FavoriteContext);
   const { addCart } = useContext(FavoriteContext);
 
   useEffect(() => {
@@ -26,7 +24,7 @@ function MovieDetail(props) {
       setMovie(res.data);
     };
     fetchData();
-  }, []);
+  }, [data.id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +38,7 @@ function MovieDetail(props) {
       );
     };
     fetchData();
-  }, []);
+  }, [data.id]);
 
   return (
     <div className='movie-detail-container'>
@@ -48,7 +46,7 @@ function MovieDetail(props) {
       <Link to={{ pathname: `/favorite` }}>Favorite Movies</Link> */}
       <div className='movie'>
         <h1>{movie.title}</h1>
-        <img src={`${imgUrl}${movie.poster_path}`} />
+        <img src={`${imgUrl}${movie.poster_path}`} alt={`${movie.title}`}/>
         <p>{movie.overview}</p>
         <Box component='fieldset' mb={3} borderColor='transparent'>
           <Typography component='legend' title={`${movie.vote_count} voters`}>
@@ -72,7 +70,7 @@ function MovieDetail(props) {
       <div className='actors-container'>
         {actors.map((actor) => (
           <div className='actor'>
-            <img src={`${actorsUrl}${actor.profile_path}`} />
+            <img src={`${actorsUrl}${actor.profile_path}`} alt={`${actor.name}`}/>
             <p>{actor.name}</p>
           </div>
         ))}
