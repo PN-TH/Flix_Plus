@@ -1,11 +1,33 @@
 .container {
-  background-color: rgb(13, 13, 14);
-
+  background-color: rgb(27, 27, 27);
+  width: 100%;
   .changePage-btn {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    margin: 10px;
+    background-color: rgb(27, 27, 27);
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  .filter-container {
+    display: flex;
+
+    .selected-year {
+      display: flex;
+      span {
+        margin-top: 15px;
+        margin-left: 15px;
+        color: white;
+      }
+    }
+  }
+
+  .filter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
   }
 
   .movies-container {
@@ -15,21 +37,18 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    border: 1px solid, black;
 
     img {
       width: 200px;
-      border: 3px solid rgb(8, 68, 63);
+      border: 3px solid rgb(26, 26, 26);
       border-radius: 20px;
       margin: 10px;
-    }
 
-    img:hover {
-      transform: scale(1.03);
-      opacity: 0.9;
-    }
-
-    .MuiTypography-body1 {
-      font-size: 3rem;
+      &:hover {
+        transform: scale(1.03);
+        opacity: 0.9;
+      }
     }
   }
 }
@@ -99,4 +118,10 @@
     margin-right: 30px;
     overflow: hidden;
   }
+}
+
+.search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Route, Link, Switch } from 'react-router-dom';
+import { FilterList } from '@material-ui/icons';
 
 export const MoviesContext = createContext();
 
@@ -10,45 +10,78 @@ const MoviesContextProvider = ({ children }) => {
   const [total_pages, setTotalPages] = useState(null);
   const [query, SetQuery] = useState('');
   const [ratingFilter, setRatingFilter] = useState('');
+  const [actorFilter, setActorFilter] = useState('');
+  const [actorID, setActorID] = useState('');
+  const [actorName, setActorName] = useState('');
+  const [releaseYear, setReleaseYear] = useState('');
   const [checked, setChecked] = React.useState(false);
   const [year, setYear] = useState('');
+  const [actors, setActors] = useState([]);
+  const [linkActor, setLinkActor] = useState('');
 
   const URL = 'https://api.themoviedb.org/3/';
   const API_KEY = '?api_key=f22eb05a70b166bd4e2c1312e15d8e8b';
-  const language = '&language=fr';
+  const language = '&language=fr-FR';
 
   let filterLink = 'discover/movie';
+  let queryLink = ''
   if (query.length > 2) {
     filterLink = 'search/movie';
+    let queryLink = '&query='
   } else {
     filterLink = 'discover/movie';
+  }
+  let filterLinkActor = `person/popular${API_KEY}`
+  if(actorName.length > 0){
+    filterLinkActor = `search/person${API_KEY}&query=${actorName}`
+  } else {
+    filterLinkActor = `person/popular${API_KEY}`
   }
 
   useEffect(() => {
     axios
       .get(
-        `${URL}${filterLink}${API_KEY}${language}&query=${query}${ratingFilter}primary_release_year=${year}&page=${page_num}`
+        `${URL}${filterLink}${API_KEY}${language}${queryLink}${query}${ratingFilter}
+        ${releaseYear}${year}${actorFilter}${actorID}&page=${page_num}`
       )
       .then((response) => {
         setMovies(response.data.results.filter((movie) => movie.poster_path));
+        setTotalPages(response.data.total_pages);
       })
       .catch(console.error);
-  }, [query, page_num, ratingFilter, checked, movies, year]);
+  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorName]);
 
-  const filterSearch = (event) => {
+  useEffect(() => {
+    axios
+      .get(`${URL}${filterLinkActor}`)
+      .then((response) => {
+        setActors(response.data.results.filter(el => el.known_for_department === "Acting"));
+      })
+      .catch(console.error);
+  }, [actorName, filterLinkActor]);
+
+  const handleSearchMovies = (event) => {
     let term = event.target.value;
     filterLink = 'search/movie';
     SetQuery((query) => term);
   };
 
-  const nextPage = () => {
-    setPageNum((page_num) => (page_num += 1));
+  const handleSearchActors = (event, values) => {
+    console.log(event.target.value)
+    console.log("name " + actorName)
+    setActorName((actorName) => event.target.value);
+    setActorFilter((actorFilter) => (actorFilter = '&with_cast='));
+    console.log(actors)
   };
 
-  const previousPage = () => {
-    if (page_num > 1) {
-      setPageNum((page_num) => (page_num -= 1));
-    }
+  const handleId = (values) => {
+    setActorID((actorID) => values.id)
+  }
+
+
+
+  const handlePaginate = (event, value) => {
+    setPageNum((page_num) => (page_num = value));
   };
 
   const handleChangeCheckBox = (event) => {
@@ -57,14 +90,20 @@ const MoviesContextProvider = ({ children }) => {
       setRatingFilter((ratingFilter) => (ratingFilter = ''));
     } else {
       setRatingFilter(
-        (ratingFilter) => (ratingFilter = '&sort_by=vote_count.desc')
+        (ratingFilter) =>
+          (ratingFilter = '&vote_count.gte=1000&sort_by=vote_average.desc')
       );
     }
   };
 
   const yearFilter = (event) => {
-    let yearToFilter = event.target.value;
-    setYear((year) => yearToFilter);
+    if (query < 3) {
+      SetQuery((query) => '');
+      filterLink = 'discover/movie';
+      let yearToFilter = event.target.value;
+      setReleaseYear((releaseYear) => `&primary_release_year=`);
+      setYear((year) => yearToFilter);
+    }
   };
 
   return (
@@ -74,14 +113,18 @@ const MoviesContextProvider = ({ children }) => {
         query,
         page_num,
         total_pages,
-        filterSearch,
-        nextPage,
-        previousPage,
+        handleSearchMovies,
         ratingFilter,
         handleChangeCheckBox,
         checked,
         yearFilter,
         year,
+        handlePaginate,
+        total_pages,
+        handleSearchActors,
+        actorID,
+        actors,
+        handleId
       }}
     >
       {children}

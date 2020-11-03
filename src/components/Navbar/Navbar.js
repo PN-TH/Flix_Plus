@@ -5,11 +5,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -20,9 +20,10 @@ import './Navbar.scss';
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'black',
     color: 'white',
     boxShadow: '0px 0px 0px 0px',
+    width: '100%',
   },
   grow: {
     flexGrow: 1,
@@ -125,7 +126,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+      <Link to={{ pathname: `/` }} className="link">Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -143,7 +145,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton aria-label='show 4 new mails' color='inherit'>
-          <Badge badgeContent={4} color='greenreact navb[500]'>
+          <Badge badgeContent={4}>
             <MailIcon />
           </Badge>
         </IconButton>
@@ -184,23 +186,8 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
-            <Link to={{ pathname: `/` }}>Home</Link>
+            <Link to={{ pathname: `/` }} className="link">Home</Link>
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder='Search…'
-              type='text'
-              onChange={filterSearch}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label='show 4 new mails' color='inherit'>

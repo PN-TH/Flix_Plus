@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
-import ArticleList from './components/Movies/MovieList';
-import ArticleDetail from './components/Movies/MovieDetail';
+import MoviesList from './components/Movies/MovieList';
+import MoviesDetail from './components/Movies/MovieDetail';
 import ArticleContextProvider from './components/_context/MoviesContextProvider';
 import FavoriteContextProvider from './components/_context/FavoriteContextProvider';
 import FavoriteMovie from './components/Favorite/FavoriteMovie';
@@ -16,8 +16,8 @@ function App() {
           <Router>
             <Navbar />
             <Switch>
-              <Route exact path='/' component={ArticleList} />
-              <Route path='/movie/:id' component={ArticleDetail} />
+              <Route exact path='/' component={MoviesList} />
+              <Route path='/movie/:id' component={MoviesDetail} />
               <Route path='/favorite' component={FavoriteMovie} />
             </Switch>
           </Router>
