@@ -1,9 +1,19 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const FavoriteContext = createContext();
 
 const FavoriteContextProvider = ({ children }) => {
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+  const initialState = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+
+  const [favoriteMovies, setFavoriteMovies] = useState([...initialState]);
+
+  useEffect(() => {
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies))
+  }, [favoriteMovies])
+
+
+
 
   const addCart = (movie) => {
     setFavoriteMovies((favoriteMovies) => {
