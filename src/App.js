@@ -7,20 +7,33 @@ import ArticleContextProvider from './components/_context/MoviesContextProvider'
 import FavoriteContextProvider from './components/_context/FavoriteContextProvider';
 import FavoriteMovie from './components/Favorite/FavoriteMovie';
 import Navbar from './components/Navbar/Navbar';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Home from './components/Home'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#15cdfc'
+    }
+  }
+});
 
 function App() {
   return (
     <div className='App'>
       <ArticleContextProvider>
         <FavoriteContextProvider>
-          <Router>
-            <Navbar />
-            <Switch>
-              <Route exact path='/' component={MoviesList} />
-              <Route path='/movie/:id' component={MoviesDetail} />
-              <Route path='/favorite' component={FavoriteMovie} />
-            </Switch>
-          </Router>
+          <MuiThemeProvider theme={theme}>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/movies' component={MoviesList} />
+                <Route path='/movie/:id' component={MoviesDetail} />
+                <Route path='/favorite' component={FavoriteMovie} />
+              </Switch>
+            </Router>
+          </MuiThemeProvider>
         </FavoriteContextProvider>
       </ArticleContextProvider>
     </div>

@@ -43,6 +43,7 @@ export const NavLinkTitle = styled(Link)`
   }
   margin-left: 20px;
   font-size: 27px;
+  padding-left: 30px;
 `;
 
 export const NavLinkBurger = styled(Link)`

@@ -1,0 +1,49 @@
+.slider-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  background-color: rgb(13, 13, 13);
+  z-index: -1;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.img-Wrapper {
+  overflow: hidden;
+  max-height: 1000px;
+  border: 20px solid transparent;
+  background-color: rgb(13, 13, 13);
+  @media screen and (max-width: 600px) {
+    border: none;
+  }
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  text-transform: capitalize;
+  text-align: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 50px;
+  text-shadow: 1px 1px 3px #ffffff;
+
+  @media screen and (min-width: 600px) {
+    font-size: 30px;
+    top: 35%;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 80px;
+    top: 50%;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 30px;
+    top: 30%;
+  }
+}

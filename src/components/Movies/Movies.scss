@@ -1,17 +1,35 @@
 .container {
   background-color: rgb(27, 27, 27);
   width: 100%;
+
+  .no-results {
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    color: #15cdfc;
+  }
   .changePage-btn {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     background-color: rgb(27, 27, 27);
     width: 100%;
     margin-right: 10px;
+    margin-left: 20px;
   }
 
   .filter-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .filter-actors {
+      display: flex;
+      align-items: center;
+    }
+
+    .filter-year {
+      margin-left: 35px;
+    }
 
     .selected-year {
       display: flex;
@@ -43,7 +61,7 @@
       width: 200px;
       border: 3px solid rgb(26, 26, 26);
       border-radius: 20px;
-      margin: 10px;
+      margin: 30px;
 
       &:hover {
         transform: scale(1.03);
@@ -121,7 +139,4 @@
 }
 
 .search {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }

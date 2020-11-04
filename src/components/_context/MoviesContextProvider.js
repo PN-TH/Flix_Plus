@@ -60,8 +60,8 @@ const MoviesContextProvider = ({ children }) => {
 
   const handleSearchMovies = (event) => {
     let term = event.target.value;
-    filterLink = 'search/movie';
     SetQuery((query) => term);
+    filterLink = 'search/movie';
   };
 
   const handleSearchActors = (event, values) => {

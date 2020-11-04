@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginRight: theme.spacing(2),
     marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -61,26 +62,22 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     color: 'whitesmoke',
-
-    '&:before': {
-      borderColor: '#3f51b5',
-    },
-    '&:after': {
-      borderColor: '#3f33b5',
-    },
   },
   FormControlLabel: {
     color: 'whitesmoke',
     fontSize: '2px',
     height: '45px',
+    borderRadius: '10px',
   },
   inputLabel: {
     color: 'whitesmoke',
     fontSize: 14,
     textAlign: 'center',
+   
   },
   pagination: {
-    color: 'whitesmoke',
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(3),
   },
   menuItem: {},
   selectEmpty: {
@@ -178,6 +175,7 @@ function MovieList() {
   return (
     <div className='container'>
       <div className="search">
+      <div className='changePage-btn'>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
@@ -193,28 +191,31 @@ function MovieList() {
           inputProps={{ 'aria-label': 'search' }}
         />
       </div>
-
-      </div>
-      <div className='filter-container'>
-        <div className='filter'>
-          {selectedYear()}
-          {bestMovieCheck()}
-          <ActorList />
-        </div>
-        <div className='changePage-btn'>
-          <Pagination
+      <Pagination
             count={total_pages}
             color='primary'
             onChange={handlePaginate}
           />
         </div>
+      </div>
+      <div className='filter-container'>
+        <div className='filter-year'>
+          {selectedYear()}
+        </div>
+        <div className='filter-actors'>
+          {bestMovieCheck()}
+          <ActorList />
+        </div>
         
       </div>
+      {movies.length > 1 ? 
       <div className='movies-container'>
         {movies.map((item) => (
           <Movie data={item} key={item.id} />
         ))}
-      </div>
+      </div> : 
+      <p className="no-results">No results found, sorry :(</p>
+      }
       <Pagination
         className={classes.pagination}
         count={total_pages}

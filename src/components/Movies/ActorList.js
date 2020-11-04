@@ -1,12 +1,19 @@
 import React, { useContext } from 'react';
 import { MoviesContext } from '../_context/MoviesContextProvider';
 // Material-UI imports
-import { makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
-    background: 'grey'
+    background: fade(theme.palette.common.white, 0.15),
+    borderRadius: '10px',
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    width: '70px',
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
   },
 }));
 
