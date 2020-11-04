@@ -29,8 +29,10 @@ function ActorList() {
         options={actors}
         onInputChange={handleSearchActors}
         getOptionLabel={(option) => option.name}
+        onChange={handleId}
+        
         style={{ width: 300 }}
-        renderInput={(params) => <TextField {...params}  onChange={handleId} label="Acteurs Populaires" variant="outlined" />}
+        renderInput={(params) => <TextField {...params}  label="Acteurs Populaires" variant="outlined" />}
       />
       </div>
   );

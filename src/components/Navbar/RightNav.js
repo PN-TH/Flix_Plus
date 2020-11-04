@@ -33,18 +33,15 @@ const Ul = styled.ul`
 const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
-          <NavLinkBurger to='/about' activeStyle>
+          <NavLinkBurger to='/' activeStyle>
             <h3>Home</h3>
             
           </NavLinkBurger>
-          <NavLinkBurger to='/services' activeStyle>
-            <h3>About</h3>
-          </NavLinkBurger>
-          <NavLinkBurger to='/contact-us' activeStyle>
-            <h3>Contact</h3>
-          </NavLinkBurger>
-          <NavLinkBurger to='/sign-up' activeStyle>
+          <NavLinkBurger to='/movies' activeStyle>
             <h3>Movies</h3>
+          </NavLinkBurger>
+          <NavLinkBurger to='/contact' activeStyle>
+            <h3>Contact</h3>
           </NavLinkBurger>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

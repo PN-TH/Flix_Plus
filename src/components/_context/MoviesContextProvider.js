@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const MoviesContext = createContext();
-
+const API_KEY = '?api_key=f22eb05a70b166bd4e2c1312e15d8e8b';
 const MoviesContextProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [page_num, setPageNum] = useState(1);
@@ -16,9 +16,10 @@ const MoviesContextProvider = ({ children }) => {
   const [checked, setChecked] = React.useState(false);
   const [year, setYear] = useState('');
   const [actors, setActors] = useState([]);
+  const [actorQuery, setActorQuery] = useState(`person/popular${API_KEY}`)
 
   const URL = 'https://api.themoviedb.org/3/';
-  const API_KEY = '?api_key=f22eb05a70b166bd4e2c1312e15d8e8b';
+ 
   const language = '&language=fr-FR';
 
   let filterLink = 'discover/movie';
@@ -28,12 +29,6 @@ const MoviesContextProvider = ({ children }) => {
     queryLink = '&query='
   } else {
     filterLink = 'discover/movie';
-  }
-  let filterLinkActor = `person/popular${API_KEY}`
-  if(actorName.length > 0){
-    filterLinkActor = `search/person${API_KEY}&query=${actorName}`
-  } else {
-    filterLinkActor = `person/popular${API_KEY}`
   }
 
   useEffect(() => {
@@ -47,36 +42,49 @@ const MoviesContextProvider = ({ children }) => {
         setTotalPages(response.data.total_pages);
       })
       .catch(console.error);
-  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorName]);
+  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorFilter]);
 
   useEffect(() => {
     axios
-      .get(`${URL}${filterLinkActor}`)
+      .get(`${URL}${actorQuery}`)
       .then((response) => {
         setActors(response.data.results.filter(el => el.known_for_department === "Acting"));
       })
       .catch(console.error);
-  }, [actorName, filterLinkActor]);
+  }, [actorName, actorQuery]);
 
   const handleSearchMovies = (event) => {
     let term = event.target.value;
-    SetQuery((query) => term);
     filterLink = 'search/movie';
+    SetQuery((query) => term);
+    setActorID("");
+    setRatingFilter("")
+    setReleaseYear("");
+    setYear("");
   };
 
   const handleSearchActors = (event, values) => {
-    console.log(event.target.value)
-    console.log("name " + actorName)
-    setActorName((actorName) => event.target.value);
-    setActorFilter((actorFilter) => (actorFilter = '&with_cast='));
-    console.log(actors)
+    setActorName(event.target.value);
+    if(actorName.length > 0){
+      setActorQuery(`search/person${API_KEY}&query=${actorName}`)
+    } else {
+      setActorQuery(`person/popular${API_KEY}`)
+      setActorID("")
+      setActorFilter("");
+    }
   };
 
-  const handleId = (values) => {
-    setActorID((actorID) => values.id)
+  const handleId = (event, values) => {
+    if(values === null){
+      setActorID("")
+      setActorFilter("");
+      setActorQuery(`person/popular${API_KEY}`)
+      setActorName("")
+    } else {
+      setActorID(values.id)
+      setActorFilter("&with_cast=");
+    }
   }
-
-
 
   const handlePaginate = (event, value) => {
     setPageNum((page_num) => (page_num = value));
@@ -87,9 +95,7 @@ const MoviesContextProvider = ({ children }) => {
     if (checked) {
       setRatingFilter((ratingFilter) => (ratingFilter = ''));
     } else {
-      setRatingFilter(
-        (ratingFilter) =>
-          (ratingFilter = '&vote_count.gte=1000&sort_by=vote_average.desc')
+      setRatingFilter('&sort_by=vote_count.desc&vote_count.gte=1000'
       );
     }
   };
