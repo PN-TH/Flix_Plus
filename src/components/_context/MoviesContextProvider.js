@@ -42,7 +42,7 @@ const MoviesContextProvider = ({ children }) => {
         setTotalPages(response.data.total_pages);
       })
       .catch(console.error);
-  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorFilter]);
+  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorFilter, filterLink, queryLink]);
 
   useEffect(() => {
     axios

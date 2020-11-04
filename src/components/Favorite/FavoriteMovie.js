@@ -9,7 +9,8 @@ function ArticleList() {
   return (
     <div>
       {favoriteMovies.map((fav) => (
-        <div>
+        
+        <div key={fav.id}>
           <h1>{fav.title}</h1>
           <img src={`${imgUrl}${fav.poster_path}`} alt={fav.title} />
           <p>{fav.overview}</p>

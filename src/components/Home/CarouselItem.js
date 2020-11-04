@@ -1,6 +1,5 @@
 import React from 'react';
 import {Paper} from '@material-ui/core'
-import Button from '@material-ui/core/Button'
 import "./Carousel.scss"
 import { Link } from 'react-router-dom';
 

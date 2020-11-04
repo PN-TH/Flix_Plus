@@ -4,7 +4,6 @@ import Example from './Home/Carousel'
 
 const Home = () => {
 
-const URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=f22eb05a70b166bd4e2c1312e15d8e8b&page=1"
   return (
     <div className="home-content style-2">
       <div className="slideshow">

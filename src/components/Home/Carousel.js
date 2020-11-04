@@ -7,10 +7,11 @@ import "./Carousel.scss"
  
 export default function Example(props)
 {
+    const apiKey = "https://api.themoviedb.org/3/movie/now_playing?api_key=f22eb05a70b166bd4e2c1312e15d8e8b&page=1"
     useEffect(() => {
         axios
           .get(
-            "https://api.themoviedb.org/3/movie/now_playing?api_key=f22eb05a70b166bd4e2c1312e15d8e8b&page=1"
+            apiKey
           )
           .then((response) => {
             setMoviesAtCinema(response.data.results);
