@@ -14,6 +14,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import SearchIcon from '@material-ui/icons/Search';
 import Select from '@material-ui/core/Select';
 import ActorList from './ActorList';
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -101,7 +102,8 @@ function MovieList() {
     checked,
     yearFilter,
     year,
-    handlePaginate
+    handlePaginate,
+    loading
   } = useContext(MoviesContext);
 
   let actualYear = new Date().getFullYear();
@@ -113,7 +115,7 @@ function MovieList() {
   const selectedYear = () => {
     return (
       <div className='selected-year'>
-        {query.length < 3 ? (
+        {query.length < 1 ? (
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor='year-label' className={classes.inputLabel}>
               Année
@@ -150,7 +152,7 @@ function MovieList() {
   const bestMovieCheck = () => {
     return (
       <div className='checkbox'>
-        {query.length < 3 ? (
+        {query.length < 1 ? (
           <FormControlLabel
             className={classes.FormControlLabel}
             control={
@@ -174,6 +176,7 @@ function MovieList() {
 
   return (
     <div className='container'>
+      {loading && <LinearProgress color="primary" />}
       <div className="search">
       <div className='changePage-btn'>
       <div className={classes.search}>
@@ -208,8 +211,10 @@ function MovieList() {
         </div>
         
       </div>
+     
       {movies.length > 1 ? 
       <div className='movies-container'>
+         
         {movies.map((item) => (
           <Movie data={item} key={item.id} />
         ))}

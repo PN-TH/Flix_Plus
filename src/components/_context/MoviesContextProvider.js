@@ -17,6 +17,7 @@ const MoviesContextProvider = ({ children }) => {
   const [year, setYear] = useState('');
   const [actors, setActors] = useState([]);
   const [actorQuery, setActorQuery] = useState(`person/popular${API_KEY}`)
+  const [loading, setLoading] = useState(true)
 
   const URL = 'https://api.themoviedb.org/3/';
  
@@ -32,17 +33,21 @@ const MoviesContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get(
         `${URL}${filterLink}${API_KEY}${language}${queryLink}${query}${ratingFilter}
         ${releaseYear}${year}${actorFilter}${actorID}&page=${page_num}`
       )
       .then((response) => {
+        setTimeout(function(){ 
         setMovies(response.data.results.filter((movie) => movie.poster_path));
         setTotalPages(response.data.total_pages);
+        setLoading(false)
+      }, 1000);
       })
-      .catch(console.error);
-  }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorFilter, filterLink, queryLink]);
+      .catch(console.error)
+    }, [query, page_num, ratingFilter, checked, year, releaseYear, actorID, actorFilter, filterLink, queryLink]);
 
   useEffect(() => {
     axios
@@ -54,13 +59,16 @@ const MoviesContextProvider = ({ children }) => {
   }, [actorName, actorQuery]);
 
   const handleSearchMovies = (event) => {
-    let term = event.target.value;
-    filterLink = 'search/movie';
-    SetQuery((query) => term);
-    setActorID("");
-    setRatingFilter("")
-    setReleaseYear("");
-    setYear("");
+      setLoading(true)
+      let value = event.target.value; 
+      setTimeout(function(){ 
+        filterLink = 'search/movie';
+        SetQuery((query) => value);
+        setActorID("");
+        setRatingFilter("")
+        setReleaseYear("");
+        setYear("");
+      }, 1000);
   };
 
   const handleSearchActors = (event, values) => {
@@ -101,7 +109,7 @@ const MoviesContextProvider = ({ children }) => {
   };
 
   const yearFilter = (event) => {
-    if (query < 3) {
+    if (query < 1) {
       SetQuery((query) => '');
       filterLink = 'discover/movie';
       let yearToFilter = event.target.value;
@@ -127,7 +135,8 @@ const MoviesContextProvider = ({ children }) => {
         handleSearchActors,
         actorID,
         actors,
-        handleId
+        handleId,
+        loading
       }}
     >
       {children}

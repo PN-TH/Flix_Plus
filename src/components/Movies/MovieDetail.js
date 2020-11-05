@@ -49,6 +49,7 @@ function MovieDetail(props) {
         <img src={`${imgUrl}${movie.poster_path}`} alt={`${movie.title}`}/>
         <p>{movie.overview}</p>
         <Box component='fieldset' mb={3} borderColor='transparent'>
+        Release: {movie.release_date}
           <Typography component='legend' title={`${movie.vote_count} voters`}>
             Rating :
           </Typography>
@@ -58,6 +59,7 @@ function MovieDetail(props) {
             value={Math.round(movie.vote_average / 2)}
             readOnly
           />
+
         </Box>
         <Button
           variant='contained'

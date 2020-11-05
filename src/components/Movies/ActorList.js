@@ -20,11 +20,12 @@ const useStyles = makeStyles((theme) => ({
 function ActorList() {
   const classes = useStyles();
 
-  const { actors, handleSearchActors, handleId } = useContext(MoviesContext);
+  const { actors, handleSearchActors, handleId, query } = useContext(MoviesContext);
 
   return (
     <div className='container'>
-              <Autocomplete className={classes.autocomplete}
+      {query.length < 1 ? 
+      <Autocomplete className={classes.autocomplete}
         id="combo-box-demo"
         options={actors}
         onInputChange={handleSearchActors}
@@ -34,6 +35,7 @@ function ActorList() {
         style={{ width: 300 }}
         renderInput={(params) => <TextField {...params}  label="Acteurs Populaires" variant="outlined" />}
       />
+      : ""}
       </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { FavoriteContext } from '../_context/FavoriteContextProvider';
+import "./Favorite.scss"
+import { Link } from 'react-router-dom';
 
 function ArticleList() {
   const imgUrl = 'https://image.tmdb.org/t/p/original';
@@ -7,13 +9,13 @@ function ArticleList() {
   const { favoriteMovies } = useContext(FavoriteContext);
 
   return (
-    <div>
+    <div className="favorite-container">
       {favoriteMovies.map((fav) => (
-        
+
         <div key={fav.id}>
-          <h1>{fav.title}</h1>
-          <img src={`${imgUrl}${fav.poster_path}`} alt={fav.title} />
-          <p>{fav.overview}</p>
+          <Link to={{ pathname: `/movie/${fav.id}` }}>
+            {fav.poster_path ? <img src={`${imgUrl}${fav.poster_path}`} alt={fav.title} /> : ''}
+          </Link>
         </div>
       ))}
     </div>
