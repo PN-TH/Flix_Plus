@@ -40,8 +40,8 @@ const RightNav = ({ open }) => {
           <NavLinkBurger to='/movies'>
             <h3>Movies</h3>
           </NavLinkBurger>
-          <NavLinkBurger to='/contact'>
-            <h3>Contact</h3>
+          <NavLinkBurger to='/about'>
+            <h3>About</h3>
           </NavLinkBurger>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

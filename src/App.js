@@ -9,6 +9,7 @@ import FavoriteMovie from './components/Favorite/FavoriteMovie';
 import Navbar from './components/Navbar/Navbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Home from './components/Home'
+import About from './components/About/About';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,9 +29,11 @@ function App() {
               <Navbar />
               <Switch>
                 <Route exact path='/' component={Home}/>
+                <Route path='/about' component={About} />
                 <Route exact path='/movies' component={MoviesList} />
                 <Route path='/movie/:id' component={MoviesDetail} />
                 <Route path='/favorite' component={FavoriteMovie} />
+                
               </Switch>
             </Router>
           </MuiThemeProvider>

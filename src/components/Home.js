@@ -9,8 +9,8 @@ const Home = () => {
       <div className="slideshow">
         <div className="overlay" />
         <div className="slide-text">
-          <h1>welcome to Flix +</h1>
-          <p>join the community TMDb</p>
+          {/* <h1>welcome to Flix +</h1>
+          <p>join the community TMDb</p> */}
         </div>
       </div>
       <Example />

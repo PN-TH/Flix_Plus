@@ -10,7 +10,7 @@ export default function Item(props)
         <>
                 <Paper>
                     <div className="carousel-container">
-                    <h2 className="centered">{props.item.title}</h2>
+                    
                     <div className="img-Wrapper">
                     <Link to={{ pathname: `/movie/${props.item.id}` }}>
                         <img 
