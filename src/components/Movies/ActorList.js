@@ -33,7 +33,7 @@ function ActorList() {
         onChange={handleId}
         
         style={{ width: 300 }}
-        renderInput={(params) => <TextField {...params}  label="Acteurs Populaires" variant="outlined" />}
+        renderInput={(params) => <TextField {...params}  label="Search actor..." variant="outlined" />}
       />
       : ""}
       </div>

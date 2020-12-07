@@ -28,8 +28,14 @@ const FavoriteContextProvider = ({ children }) => {
     });
   };
 
+  const handleDelete = id => {
+    const temp = [...favoriteMovies];
+    temp.splice(id, 1);
+    setFavoriteMovies((favoriteMovies) => favoriteMovies = temp)
+}
+
   return (
-    <FavoriteContext.Provider value={{ favoriteMovies, addCart }}>
+    <FavoriteContext.Provider value={{ favoriteMovies, addCart, handleDelete }}>
       {children}
     </FavoriteContext.Provider>
   );

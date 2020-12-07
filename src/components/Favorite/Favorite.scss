@@ -2,13 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px;
 
   img {
     width: 200px;
-
-    &:hover {
-      opacity: 0.8;
-    }
+  }
+  button {
+    position: absolute;
   }
 }

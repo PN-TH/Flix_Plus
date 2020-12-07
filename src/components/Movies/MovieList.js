@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
    
   },
   pagination: {
-    color: theme.palette.common.white,
+    color: 'white',
     marginBottom: theme.spacing(3),
   },
   menuItem: {},
@@ -118,7 +118,7 @@ function MovieList() {
         {query.length < 1 ? (
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor='year-label' className={classes.inputLabel}>
-              Année
+              Year
             </InputLabel>
 
             <Select
@@ -127,7 +127,7 @@ function MovieList() {
               onChange={yearFilter}
               label={year}
               inputProps={{
-                name: 'Année',
+                name: 'Year',
                 id: 'year-label',
               }}
             >
@@ -198,6 +198,7 @@ function MovieList() {
             count={total_pages}
             color='primary'
             onChange={handlePaginate}
+            className={classes.pagination}
           />
         </div>
       </div>

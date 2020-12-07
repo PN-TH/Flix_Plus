@@ -29,7 +29,6 @@ function App() {
               <Navbar />
               <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route path='/about' component={About} />
                 <Route exact path='/movies' component={MoviesList} />
                 <Route path='/movie/:id' component={MoviesDetail} />
                 <Route path='/favorite' component={FavoriteMovie} />

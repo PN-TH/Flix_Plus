@@ -66,7 +66,7 @@ function MovieDetail(props) {
           color='primary'
           onClick={() => addCart(movie)}
         >
-          Add to List
+          Add to Wishes
         </Button>
       </div>
       <div className='actors-container'>
